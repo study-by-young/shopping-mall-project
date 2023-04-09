@@ -3,12 +3,15 @@ package com.shop.repository;
 import com.shop.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ItemRepository extends JpaRepository<Item, Long> {
+public interface ItemRepository extends JpaRepository<Item, Long>, QuerydslPredicateExecutor<Item> {
     // JpaRepository는 2개의 제네릭 타입을 사용한다. JpaRepository<엔티티 타입 클래스, 기본키 타입>
+    // Repository 에 Predicate 를 파라미터로 전달하기 위해서 QuerydslPredicateExecutor 인터페이스 상속
+    // Predicate 란 조건이 맞다고 판단하는 근거를 함수로 제공하는 것
 
     List<Item> findByItemNm(String itemNm);
 
